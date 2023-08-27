@@ -1,0 +1,112 @@
+<%- include('../components/header.ejs') %>
+<div class="card mb-3" style="padding: 15px; margin-bottom: 0px;">
+  <table class="table" id="table">
+      <thead class="table-light">
+        <tr>
+          <th>#</th>
+          <th>Müşteri</th>
+          <th>Oda/Masa</th>
+          <th>Kaç Kişi</th>
+          <th>Rezarvasyon Tarihi</th>
+          <th>İşlem</th>
+        </tr>
+      </thead>
+      <tbody class="table-border-bottom-0">
+        <% data.forEach(function(reservation) { %>
+          <tr>
+            <td><%= reservation.id %></td>
+            <td><%= reservation.customer.name %></td>
+            <td><%= reservation.table.name %></td>
+            <td><%= reservation.person_count %></td>
+            <td><%= reservation.start_date %> - <%= reservation.end_date %></td>
+            <td class="gap-1" style="white-space: nowrap;">
+              <a href="/reservation_cancel/<%= reservation.id %>"><i class="bx bx-trash me-1"></i></a>
+            </td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+    <button type="button" class="btn btn-primary" id="crt">
+      Rezervasyon Oluştur
+    </button>
+    <script>
+      document.getElementById('crt').addEventListener('click', function () {
+        Swal.fire({
+          title: 'Rezervasyon Oluştur',
+          html: `
+          <select class="form-select" name="table">
+            <option value="" selected disabled hidden>Lütfen bir oda/masa seçiniz.</option>
+            <% tables.forEach(function(table) { %>
+              <option value="<%= table.id %>"><%= table.name %> - <%= table.capacity %> Kişilik</option>
+            <% }); %>
+          </select><br>
+
+          <select class="form-select" name="customer">
+            <option value="" selected disabled hidden>Lütfen bir müşteri seçiniz.</option>
+            <% customers.forEach(function(customer) { %>
+              <option value="<%= customer.id %>"><%= customer.name %></option>
+            <% }); %>
+          </select><br>
+
+          <input type="number" id="person_count" class="form-control" placeholder="Kaç Kişi?" aria-label="Kaç Kişi?" aria-describedby="basic-icon-default-fullname2" /><br>
+          <input type="datetime-local" id="start_date" class="form-control" placeholder="Başlangıç Tarihi" aria-label="Başlangıç Tarihi" aria-describedby="basic-icon-default-fullname2" /><br>
+          <input type="datetime-local" id="end_date" class="form-control" placeholder="Bitiş Tarihi" aria-label="Bitiş Tarihi" aria-describedby="basic-icon-default-fullname2" /><br>
+          `,
+          showCancelButton: true,
+          confirmButtonText: 'Oluştur',
+          cancelButtonText: 'İptal',
+          inputValidator: (value) => {
+            if (!value) {
+              return 'Lütfen tüm alanları doldurunuz.'
+            }
+          },
+        }).then((result) => {
+          if (result.isConfirmed) {
+            let table = document.querySelector('select[name="table"]').value;
+            let customer = document.querySelector('select[name="customer"]').value;
+            let person_count = document.getElementById('person_count').value;
+            let start_date = document.getElementById('start_date').value;
+            let end_date = document.getElementById('end_date').value;
+            let data = {
+              table: table,
+              customer: customer,
+              person_count: person_count,
+              start_date: start_date,
+              end_date: end_date
+            }
+            fetch('/reservation_create', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(data)
+            }).then(function (response) {
+              return response.json();
+            }).then(function (data) {
+              if (data.status == 'success') {
+                Swal.fire({
+                  title: 'Başarılı!',
+                  text: 'Rezervasyon oluşturuldu.',
+                  icon: 'success',
+                  confirmButtonText: 'Tamam'
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                    window.location.reload();
+                  }
+                })
+              } else {
+                Swal.fire({
+                  title: 'Hata!',
+                  text: 'Rezervasyon oluşturulamadı.',
+                  icon: 'error',
+                  confirmButtonText: 'Tamam'
+                })
+              }
+            });
+          }
+        })
+      });
+    </script>
+</div>
+
+<%- include('../components/footer.ejs') %>

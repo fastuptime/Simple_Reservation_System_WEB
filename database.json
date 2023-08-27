@@ -1,0 +1,33 @@
+{
+  "customers": [
+    {
+      "id": "7222025",
+      "name": "Can",
+      "surname": "Kaya",
+      "phone": "02426699116",
+      "note": "TC:qweq",
+      "created_at": "27.08.2023 18:55:28",
+      "updated_at": "27.08.2023 18:55:28"
+    },
+    {
+      "id": "722205",
+      "name": "Can",
+      "surname": "Kaya",
+      "phone": "02426699116",
+      "note": "TC:qweq",
+      "created_at": "27.08.2023 18:55:28",
+      "updated_at": "27.08.2023 18:55:28"
+    }
+  ],
+  "rooms": [
+    {
+      "id": 6387450,
+      "name": "Oda 2",
+      "capacity": 5,
+      "reservation_count": 2,
+      "created_at": "27.08.2023 19:28:47",
+      "updated_at": "27.08.2023 19:28:47"
+    }
+  ],
+  "rezervasyon": []
+}

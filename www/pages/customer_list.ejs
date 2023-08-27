@@ -1,0 +1,44 @@
+<%- include('../components/header.ejs') %>
+              <div class="card mb-3" style="padding: 15px; margin-bottom: 0px;">
+              <table class="table" id="table">
+                <thead class="table-light">
+                  <tr>
+                    <th>#</th>
+                    <th>İsim</th>
+                    <th>Soyisim</th>
+                    <th>Telefon</th>
+                    <th>Kayıt Tarihi</th>
+                    <th>Son Ziyareti</th>
+                    <th class="gap-1" style="white-space: nowrap;">İşlemler</th>
+                  </tr>
+                </thead>
+                <tbody class="table-border-bottom-0">
+                      <% data.forEach(function(customer) { %>
+                        <tr>
+                          <td>
+                            <%= customer.id %>
+                          </td>
+                          <td>
+                            <%= customer.name %>
+                          </td>
+                          <td>
+                            <%= customer.surname %>
+                          </td>
+                          <td>
+                            <%= customer.phone %>
+                          </td>
+                          <td>
+                            <%= customer.created_at %>
+                          </td>
+                          <td>
+                            <%= customer.updated_at %>
+                          </td>
+                          <td class="gap-1" style="white-space: nowrap;">
+                            <a href="/customer_cancel/<%= customer.id %>"><i class="bx bx-trash me-1"></i></a>
+                          </td>
+                        </tr>
+                        <% }); %>
+                </tbody>
+              </table>
+              </div>
+<%- include('../components/footer.ejs') %>

@@ -1,0 +1,43 @@
+<%- include('../components/header.ejs') %>
+<div class="col-xl">
+  <div class="card mb-4">
+    <div class="card-header d-flex justify-content-between align-items-center">
+    </div>
+    <div class="card-body">
+      <form class="row g-3" action="/customer_create" method="POST">
+        <div class="row g-3 col-md-12">
+          <div class="mb-3 col-md-6">
+            <label class="form-label" for="basic-icon-default-fullname">Ad</label>
+            <div class="input-group input-group-merge">
+              <input type="text" class="form-control" id="basic-icon-default-fullname" name="name" placeholder="John"
+                aria-label="John" aria-describedby="basic-icon-default-fullname2" />
+            </div>
+          </div>
+          <div class="mb-3 col-md-6">
+            <label class="form-label" for="basic-icon-default-fullname">Soyad</label>
+            <div class="input-group input-group-merge">
+              <input type="text" class="form-control" id="basic-icon-default-fullname" name="surname" placeholder="Doe"
+               aria-label="Doe" aria-describedby="basic-icon-default-fullname2" />
+            </div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="basic-icon-default-phone">Telefon</label>
+          <div class="input-group input-group-merge">
+            <span id="basic-icon-default-phone2" class="input-group-text"><i class="bx bx-phone"></i></span>
+            <input type="text" id="basic-icon-default-phone" class="form-control phone-mask" placeholder="658 799 8941"
+              aria-label="658 799 8941" aria-describedby="basic-icon-default-phone2" name="phone" />
+          </div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="basic-icon-default-phone">Not</label>
+          <div class="input-group input-group-merge">
+            <textarea class="form-control" id="basic-icon-default-phone" name="note" rows="3">TC:</textarea>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary col-md-12">Oluştur</button>
+      </form>
+    </div>
+  </div>
+</div>
+<%- include('../components/footer.ejs') %>

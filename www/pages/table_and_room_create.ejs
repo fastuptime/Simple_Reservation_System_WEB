@@ -1,0 +1,29 @@
+<%- include('../components/header.ejs') %>
+<div class="col-xl">
+  <div class="card mb-4">
+    <div class="card-header d-flex justify-content-between align-items-center">
+    </div>
+    <div class="card-body">
+      <form class="row g-3" action="/room_create" method="POST">
+        <div class="row g-3 col-md-12">
+          <div class="mb-3 col-md-6">
+            <label class="form-label" for="basic-icon-default-fullname">Oda/Masa Adı</label>
+            <div class="input-group input-group-merge">
+              <input type="text" class="form-control" id="basic-icon-default-fullname" name="name" placeholder="Oda 1"
+                aria-label="Oda 1" aria-describedby="basic-icon-default-fullname2" />
+            </div>
+          </div>
+          <div class="mb-3 col-md-6">
+            <label class="form-label" for="basic-icon-default-fullname">Kaç Kişilik</label>
+            <div class="input-group input-group-merge">
+              <input type="number" class="form-control" id="basic-icon-default-fullname" name="capacity" placeholder="4"
+                aria-label="4" aria-describedby="basic-icon-default-fullname2" />
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary col-md-12">Oluştur</button>
+      </form>
+    </div>
+  </div>
+</div>
+<%- include('../components/footer.ejs') %>
